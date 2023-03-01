@@ -16,6 +16,17 @@ function closeOptions() {
     options.classList.remove('invisible')
   }
 
+function handleSubmit() {
+  return(exercise)
+}
+
+let exercise = {
+    name: 'Run4',
+    distance: 3,
+    calories: 100,
+    time: 10.32
+}
+
 </script>
 
 
@@ -32,24 +43,20 @@ function closeOptions() {
   <i @click="closeOptions" class="close">&#10006;</i>
 </div>
 
-<form>
+<div id="exercise-form">
+<form @submit.prevent>
   <label for="name">Name Run:</label>
-  <input type="text" id="name" name="name" required>
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="exercise-date" value="2023-02-22" min="2023-01-01" max="2025-12-31">
-  <label for="time">Time of Day:</label>
-  <input type="time" id="time" name="time" min="00:00" max="24:00">
+  <input v-model="exercise.name" type="text" id="name" name="name">
   <label for="distance">Distance:</label>
-  <input type="number" id="distance" name="distance" placeholder="Miles" required>
+  <input  v-model="exercise.distance" type="number" id="distance" name="distance" placeholder="Miles">
   <label for="calories">Calories Burned:</label>
-  <input type="text" id="calories" name="calories">
+  <input  v-model="exercise.calories" type="text" id="calories" name="calories">
   <label for="runtime">Run Time:</label>
-  <input type="text" name="duration" id="durationForm" maxlength=8 pattern="^((\d+:)?\d+:)?\d*$" title="hh:mm:ss" placeholder="hh:mm:ss" size=30>
-  <label for="notes">Notes:</label>
-  <input type="textarea" id="notes" name="notes">
+  <input  v-model="exercise.time" type="text" name="duration" d="durationForm" maxlength=8 size=30>
   
-  <input class="submitForm" type="submit" value="Submit">
+  <button @click="$emit('add', handleSubmit())">Submit Exercise</button>
 </form>
+</div>
 
     </div>
 </template>
@@ -105,12 +112,12 @@ form input {
 form label {
     padding-top: 3%;
 }
-.submitForm {
+button {
     border: none;
     border-radius: 10px;
     margin-top: 20px;
 }
-.submitForm:hover {
+button:hover {
     cursor: pointer;
     background-color:rgb(91, 83, 99)
 }

@@ -35,18 +35,18 @@ function closeOptions() {
 
 <form>
   <label for="name">Name Exercise:</label>
-  <input type="text" id="name" name="name" required>
+  <input type="text" id="name" name="name">
   <label for="date">Date:</label>
   <input type="date" id="date" name="exercise-date" value="2023-02-22" min="2023-01-01" max="2025-12-31">
   <label for="time">Time of Day:</label>
   <input type="time" id="time" name="time" min="00:00" max="24:00">
   <label id="workoutLabel" for="workout">Workout:</label>
   <label for="workoutType">Workout Type:</label>
-  <input type="text" id="workoutType" name="workoutType" required>
+  <input type="text" id="workoutType" name="workoutType">
   <label for="sets">Sets:</label>
-  <input type="number" id="sets" name="sets" required>
+  <input type="number" id="sets" name="sets">
   <label for="reps">Reps:</label>
-  <input type="number" id="reps" name="reps" required>
+  <input type="number" id="reps" name="reps">
   <label for="weight">Weight:</label>
   <input type="number" id="weight" name="weight">
   <label for="calories">Calories Burned:</label>

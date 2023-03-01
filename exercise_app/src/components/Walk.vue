@@ -35,13 +35,13 @@ function closeOptions() {
 
 <form>
   <label for="name">Name Walk:</label>
-  <input type="text" id="name" name="name" required>
+  <input type="text" id="name" name="name">
   <label for="date">Date:</label>
   <input type="date" id="date" name="exercise-date" value="2023-02-22" min="2023-01-01" max="2025-12-31">
   <label for="time">Time of Day:</label>
   <input type="time" id="time" name="time" min="00:00" max="24:00">
   <label for="distance">Distance:</label>
-  <input type="number" id="distance" name="distance" placeholder="Miles" required>
+  <input type="number" id="distance" name="distance" placeholder="Miles">
   <label for="calories">Calories Burned:</label>
   <input type="text" id="calories" name="calories">
   <label for="runtime">Walk Time:</label>
