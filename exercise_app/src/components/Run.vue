@@ -1,10 +1,51 @@
-<script setup>
+<template>
+    <div id="runForm" class="invisible">
 
-defineProps({
-  msg: String,
-})
+        <div id="header">
+  <h3>Track Your Run</h3>
+  <i @click="closeOptions" class="close">&#10006;</i>
+</div>
 
-function closeOptions() {
+<div id="exercise-form">
+<form @submit.prevent>
+  <label for="name">Name Run:</label>
+  <input v-model="exercise.name" type="text" id="name" name="name">
+  <label for="date">Date:</label>
+  <input v-model="exercise.date" type="text" id="date" name="exercise-date" placeholder="mm/dd/yyyy">
+  <label for="distance">Distance:</label>
+  <input  v-model="exercise.distance" type="number" id="distance" name="distance" placeholder="Miles">
+  <label for="calories">Calories Burned:</label>
+  <input  v-model="exercise.calories" type="text" id="calories" name="calories">
+  <label for="runtime">Run Time:</label>
+  <input  v-model="exercise.time" type="text" name="duration" d="durationForm" maxlength=8 size=30 placeholder="mm:ss">
+  
+  <button @click="closeOptions(), handleSubmit()">Submit Exercise</button>
+</form>
+</div>
+
+    </div>
+</template>
+
+<script>
+let date
+let distance
+let calories
+let time
+export default {
+    name: 'exercise-form',
+    data() {
+        return{
+            exercise: {
+            name: '',
+            date,
+            distance,
+            calories,
+            time
+        },
+    }
+},
+methods: {
+    closeOptions() {
     let form = document.getElementById('runForm')
     let options = document.getElementById('options')
     if (form.classList.contains('invisible')) {
@@ -13,53 +54,15 @@ function closeOptions() {
         form.classList.add('invisible')
     }
 
-    options.classList.remove('invisible')
+    options.classList.add('invisible')
+  },
+  handleSubmit() {
+    this.$emit('add', this.exercise)
   }
-
-function handleSubmit() {
-  return(exercise)
 }
-
-let exercise = {
-    name: 'Run4',
-    distance: 3,
-    calories: 100,
-    time: 10.32
 }
 
 </script>
-
-
-
-
-
-
-
-<template>
-    <div id="runForm" class="invisible">
-
-        <div id="header">
-  <h3 class="openingTitle">{{ msg }}</h3>
-  <i @click="closeOptions" class="close">&#10006;</i>
-</div>
-
-<div id="exercise-form">
-<form @submit.prevent>
-  <label for="name">Name Run:</label>
-  <input v-model="exercise.name" type="text" id="name" name="name">
-  <label for="distance">Distance:</label>
-  <input  v-model="exercise.distance" type="number" id="distance" name="distance" placeholder="Miles">
-  <label for="calories">Calories Burned:</label>
-  <input  v-model="exercise.calories" type="text" id="calories" name="calories">
-  <label for="runtime">Run Time:</label>
-  <input  v-model="exercise.time" type="text" name="duration" d="durationForm" maxlength=8 size=30>
-  
-  <button @click="$emit('add', handleSubmit())">Submit Exercise</button>
-</form>
-</div>
-
-    </div>
-</template>
 
 
 

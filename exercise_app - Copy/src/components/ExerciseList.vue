@@ -1,3 +1,35 @@
+<script setup>
+
+defineProps({
+  exercises: Array,
+})
+
+function data() {
+  return {
+    editing: null
+  }
+}
+
+function handleDelete(id) {
+  return(id)
+}
+
+
+function handleEdit(id) {
+  return {
+    editing: null
+  }
+}
+
+
+</script>
+
+
+
+
+
+
+
 <template>
   <div id="exercise-list">
     <table>
@@ -5,9 +37,9 @@
         <tr>
           <th>Exercise Name</th>
           <th>Date of Exercise</th>
-          <th>Distance(miles)</th>
+          <th>Distance</th>
           <th>Calories Burned</th>
-          <th>Time(minutes)</th>
+          <th>Time</th>
         </tr>
       </thead>
       <tbody>
@@ -40,39 +72,20 @@
 
 
         <td v-if="editing === exercise.id">
-          <button @click="editing = null">Save</button>
-          <button @click="editing = null">Cancel</button>
+          <button @click="editExercise(exercise)">Save</button>
+          <button @click="editing=null">Cancel</button>
         </td>
 
 
         <td class="buttons">
           <button @click="handleEdit(exercise.id)">Edit</button>
-          <button @click="$emit('past', exercise), $emit('delete', exercise.id)">Delete</button>
+          <button @click="$emit('delete', handleDelete(exercise.id))">Delete</button>
         </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'exercise-list',
-  props: {
-    exercises: Array,
-  },
-  data() {
-    return {
-      editing: null
-    }
-  },
-  methods: {
-    handleEdit(id) {
-      this.editing = id
-    }
-  }
-}
-</script>
 
 
 
@@ -102,9 +115,4 @@ button {
 button:hover {
   background-color: blanchedalmond;
   color: black;
-}
-td input {
-  padding: 3%;
-  background-color: rgb(175, 168, 158);
-  border: none;
 }</style>

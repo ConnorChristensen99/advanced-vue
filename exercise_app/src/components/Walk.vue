@@ -1,11 +1,47 @@
-<script setup>
+<template>
+    <div id="walkForm" class="invisible">
 
-defineProps({
-  msg: String,
-})
+        <div id="header">
+  <h3>Track Your Walk</h3>
+  <i @click="closeOptions" class="close">&#10006;</i>
+</div>
 
+<div id="exercise-form">
+<form @submit.prevent>
+  <label for="name">Name Walk:</label>
+  <input v-model="exercise.name" type="text" id="name" name="name">
+  <label for="date">Date:</label>
+  <input type="text" id="date" name="exercise-date" placeholder="mm/dd/yyyy">
+  <label for="distance">Distance:</label>
+  <input  v-model="exercise.distance" type="number" id="distance" name="distance" placeholder="Miles">
+  <label for="calories">Calories Burned:</label>
+  <input  v-model="exercise.calories" type="text" id="calories" name="calories">
+  <label for="runtime">Walk Time:</label>
+  <input  v-model="exercise.time" type="text" name="duration" d="durationForm" maxlength=8 size=30>
+  
+  <button @click="closeOptions(), $emit('add', handleSubmit())">Submit Exercise</button>
+</form>
+</div>
 
-function closeOptions() {
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'exercise-form',
+    data() {
+        return{
+            exercise: {
+            name: '',
+            date: '',
+            distance: 0,
+            calories: 0,
+            time: 0
+        },
+    }
+},
+methods: {
+    closeOptions() {
     let form = document.getElementById('walkForm')
     let options = document.getElementById('options')
     if (form.classList.contains('invisible')) {
@@ -14,46 +50,15 @@ function closeOptions() {
         form.classList.add('invisible')
     }
 
-    options.classList.remove('invisible')
+    options.classList.add('invisible')
+  },
+  handleSubmit() {
+    this.$emit('add', this.exercise)
   }
+}
+}
 
 </script>
-
-
-
-
-
-
-
-<template>
-    <div id="walkForm" class="invisible">
-
-        <div id="header">
-  <h3 class="openingTitle">{{ msg }}</h3>
-  <i  @click="closeOptions" class="close">&#10006;</i>
-</div>
-
-<form>
-  <label for="name">Name Walk:</label>
-  <input type="text" id="name" name="name">
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="exercise-date" value="2023-02-22" min="2023-01-01" max="2025-12-31">
-  <label for="time">Time of Day:</label>
-  <input type="time" id="time" name="time" min="00:00" max="24:00">
-  <label for="distance">Distance:</label>
-  <input type="number" id="distance" name="distance" placeholder="Miles">
-  <label for="calories">Calories Burned:</label>
-  <input type="text" id="calories" name="calories">
-  <label for="runtime">Walk Time:</label>
-  <input type="text" name="duration" id="durationForm" maxlength=8 pattern="^((\d+:)?\d+:)?\d*$" title="hh:mm:ss" placeholder="hh:mm:ss" size=30>
-  <label for="notes">Notes:</label>
-  <input type="textarea" id="notes" name="notes">
-  
-  <input class="submitForm" type="submit" value="Submit">
-</form>
-
-    </div>
-</template>
 
 
 
@@ -106,12 +111,12 @@ form input {
 form label {
     padding-top: 3%;
 }
-.submitForm {
+button {
     border: none;
     border-radius: 10px;
     margin-top: 20px;
 }
-.submitForm:hover {
+button:hover {
     cursor: pointer;
     background-color:rgb(91, 83, 99)
 }
